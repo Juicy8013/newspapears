@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carte blanche</title>
+    <noscript
+      >Javascript is disabled on your browser. This page may not display as
+      intended.</noscript
+    >
+
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.15.0/css/fontawesome.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.15.0/css/solid.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+
+    <style>
+      @font-face {
+        font-family: "Rockwell";
+        src: url("assets/rockwell.otf") format("opentype");
+      }
+
+      body {
+        background: url("assets/images/background_x512.webp");
+        color: #ffc;
+        font-family: "Rockwell";
+        min-width: 100vw;
+        min-height: 100vh;
+      }
+
+      .header {
+        margin: 4px;
+        position: absolute;
+      }
+
+      .wrapper {
+        align-content: center;
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: auto;
+      }
+
+      .interaction img {
+        max-width: 290px;
+        transition: 0.1s ease-out;
+      }
+
+      .interaction img:hover {
+        filter: drop-shadow(0 0 0.3rem #fbc531);
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div id="play-button" class="button is-link">
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-play"></i>
+          </span>
+          <span>Play</span>
+        </span>
+      </div>
+    </header>
+
+    <main>
+      <div class="modal is-active" onclick="this.remove()">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+          <div class="container">
+            <div class="content is-size-1 has-text-centered">
+              <p>Jeunes gens, prenez garde aux choses que vous dites.</p>
+              <p>Tout peut sortir d'un mot qu'en passant vous perdîtes.</p>
+              <p>Tout, la haine et le deuil ! - Et ne m'objectez pas</p>
+              <p>Que vos amis sont sûrs et que vous parlez bas... -</p>
+              <p class="has-text-left">Ecoutez bien ceci :</p>
+            </div>
+          </div>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+      </div>
+
+      <div class="wrapper">
+        <figure class="interaction">
+          <img src="assets/images/1_gossip-cf.webp" type="image/webp" />
+          <audio src="assets/audio/1_gossip-cf.mp3"
+          data-volume='{ "default": 0.5, "high": 1, "low": 0.05}'
+          ></audio>
+        </figure>
+
+        <figure class="interaction">
+          <img src="assets/images/2_gossip-fl.webp" type="image/webp" />
+          <audio src="assets/audio/2_gossip-fl.mp3"
+                data-volume='{ "default": 0.5, "high": 1, "low": 0.05}'
+                ></audio>
+        </figure>
+
+        <figure class="interaction">
+          <img src="assets/images/3_gossip-lf.webp" type="image/webp" />
+          <audio src="assets/audio/3_gossip-lf.mp3"
+                data-volume='{ "default": 0.5, "high": 1, "low": 0.01}'
+          ></audio>
+        </figure>
+
+        <figure class="interaction">
+          <img src="assets/images/4_gossip-fo.webp" type="image/webp" />
+          <audio src="assets/audio/4_gossip-fo.mp3"></audio>
+        </figure>
+
+        <figure class="interaction">
+          <img src="assets/images/5_gossip-oi.webp" type="image/webp" />
+          <audio src="assets/audio/5_gossip-oi.mp3"></audio>
+        </figure>
+
+        <figure class="interaction">
+          <img src="assets/images/6_gossip-is.webp" type="image/webp" />
+          <audio src="assets/audio/6_gossip-is.mp3"></audio>
+        </figure>
+
+        <figure class="interaction">
+          <img src="assets/images/7_gossip-sa.webp" type="image/webp" />
+          <audio src="assets/audio/7_gossip-sa.mp3"></audio>
+        </figure>
+
+        <figure class="interaction">
+          <img src="assets/images/8_gossip-ac.webp" type="image/webp" />
+          <audio src="assets/audio/8_gossip-ac.mp3"></audio>
+        </figure>
+
+        <figure class="interaction">
+          <img src="assets/images/9_gossip-cc.webp" type="image/webp" />
+          <audio src="assets/audio/9_gossip-cc.mp3"
+                data-volume='{ "default": 0.05, "high": 0.4, "low": 0.05}'
+          ></audio>
+        </figure>
+      </div>
+
+      <audio id="background-audio" src="assets/audio/background.mp3"></audio>
+    </main>
+
+    <script type="text/javascript">
+      const wrapper = document.querySelector(".wrapper");
+      const button = document.getElementById("play-button");
+      const background = document.getElementById("background-audio");
+      const defaultVolume = {
+        default: 0.05,
+        high: 7,
+        low: 0.001,
+      };
+      let PLAY = false;
+
+      class Interaction {
+        constructor(element, target, options = {}) {
+          this.element = element;
+          this.target = target;
+          this.options = {
+            ...options,
+          };
+        }
+
+        /**
+         * @returns {thisType[]}
+         */
+        static bind(selector) {
+          return Array.from(document.querySelectorAll(selector)).map(
+            (element) => {
+              return new this(element);
+            }
+          );
+        }
+      }
+
+      class AudioInteraction extends Interaction {
+        constructor(element, options = {}) {
+          const target = element.lastElementChild;
+          target.loop = true;
+
+          if (target.dataset && "volume" in target.dataset) {
+            options.volume = Object.assign(
+              defaultVolume,
+              JSON.parse(target.dataset.volume)
+            );
+          } else {
+            options.volume = defaultVolume;
+          }
+
+          super(element, target, options);
+        }
+
+        setVolume(k) {
+          if (Object.keys(this.options.volume).includes(k)) {
+            this.target.volume = this.options.volume[k];
+          }
+        }
+      }
+
+      function makeSquare(element, width) {
+        element.setAttribute(
+          "style",
+          `max-width: ${width}px; min-height: ${width}px`
+        );
+      }
+
+      function clientMinSize() {
+        return Math.min(document.body.clientWidth, document.body.clientHeight);
+      }
+
+      function updateButton(button, state) {
+        const className = "fas " + (state ? "fa-pause" : "fa-play");
+        const content = state ? "Pause" : "Play";
+
+        const children = button.firstElementChild.children;
+        children[0].firstElementChild.setAttribute("class", className);
+        children[1].innerHTML = content;
+      }
+
+      function onMouseOver(interaction, interactions) {
+        interactions.forEach((i) => i.setVolume("low"));
+        interaction.setVolume("high");
+      }
+
+      function onMouseOut(interaction, interactions) {
+        interactions.forEach((i) => i.setVolume("default"));
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        const interactions = AudioInteraction.bind(".interaction");
+
+        makeSquare(wrapper, clientMinSize());
+        window.addEventListener("resize", (e) =>
+          maxeSquare(wrapper, clientMinSize())
+        );
+
+        background.volume = 0.1;
+        background.loop = true;
+
+        button.addEventListener("click", (e) => {
+          PLAY = !PLAY;
+          updateButton(button, PLAY);
+
+          if (PLAY) {
+            background.play();
+            interactions.forEach((interaction) => {
+              interaction.target.play();
+              interaction.setVolume("default");
+
+              interaction.element.addEventListener("mouseover", () =>
+                onMouseOver(interaction, interactions)
+              );
+              interaction.element.addEventListener("mouseout", () =>
+                onMouseOut(interaction, interactions)
+              );
+            });
+          } else {
+            background.pause();
+            interactions.forEach((interaction) => {
+              interaction.target.pause();
+              interaction.element.removeEventListener("mouseover", onMouseOver);
+              interaction.element.removeEventListener("mouseover", onMouseOut);
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
