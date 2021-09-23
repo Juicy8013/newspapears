@@ -150,7 +150,7 @@
 
     <script type="text/javascript">
       const wrapper = document.querySelector(".wrapper");
-      const button = document.getElementById("play-button");
+      const playButton = document.getElementById("play-button");
       const background = document.getElementById("background-audio");
       const defaultVolume = {
         default: 0.05,
@@ -215,11 +215,11 @@
         return Math.min(document.body.clientWidth, document.body.clientHeight);
       }
 
-      function updateButton(button, state) {
+      function updateButton(element, state) {
         const className = "fas " + (state ? "fa-pause" : "fa-play");
         const content = state ? "Pause" : "Play";
 
-        const children = button.firstElementChild.children;
+        const children = element.firstElementChild.children;
         children[0].firstElementChild.setAttribute("class", className);
         children[1].innerHTML = content;
       }
@@ -238,15 +238,15 @@
 
         makeSquare(wrapper, clientMinSize());
         window.addEventListener("resize", (e) =>
-          maxeSquare(wrapper, clientMinSize())
+          makeSquare(wrapper, clientMinSize())
         );
 
         background.volume = 0.1;
         background.loop = true;
 
-        button.addEventListener("click", (e) => {
+        playButton.addEventListener("click", (e) => {
           PLAY = !PLAY;
-          updateButton(button, PLAY);
+          updateButton(playButton, PLAY);
 
           if (PLAY) {
             background.play();
