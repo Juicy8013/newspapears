@@ -30,7 +30,6 @@
 
       body {
         background: url("assets/images/background_x512.webp");
-        color: #ffc;
         font-family: "Rockwell";
         min-width: 100vw;
         min-height: 100vh;
@@ -74,22 +73,6 @@
     </header>
 
     <main>
-      <div class="modal is-active" onclick="this.remove()">
-        <div class="modal-background"></div>
-        <div class="modal-content">
-          <div class="container">
-            <div class="content is-size-1 has-text-centered">
-              <p>Jeunes gens, prenez garde aux choses que vous dites.</p>
-              <p>Tout peut sortir d'un mot qu'en passant vous perdîtes.</p>
-              <p>Tout, la haine et le deuil ! - Et ne m'objectez pas</p>
-              <p>Que vos amis sont sûrs et que vous parlez bas... -</p>
-              <p class="has-text-left">Ecoutez bien ceci :</p>
-            </div>
-          </div>
-        </div>
-        <button class="modal-close is-large" aria-label="close"></button>
-      </div>
-
       <div class="wrapper">
         <figure class="interaction">
           <img src="assets/images/1_gossip-cf.webp" type="image/webp" />
@@ -147,6 +130,7 @@
 
       <audio id="background-audio" src="assets/audio/background.mp3"></audio>
     </main>
+
 
     <script type="text/javascript">
       const wrapper = document.querySelector(".wrapper");
