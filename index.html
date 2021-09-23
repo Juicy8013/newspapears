@@ -214,14 +214,11 @@
       }
 
       function makeSquare(element, width) {
-        element.setAttribute(
-          "style",
-          `max-width: ${width}px; min-height: ${width}px`
-        );
+        element.setAttribute("style", `max-width: ${width}px; min-height: ${width}px`);
       }
 
       function clientMinSize() {
-        return Math.min(document.body.clientWidth, document.body.clientHeight);
+        return Math.min(document.documentElement.clientWidth, document.documentElement.clientHeight);
       }
 
       function updateButton(element, state) {
