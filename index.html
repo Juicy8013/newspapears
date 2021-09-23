@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
+    <title>NewsPapears</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Carte blanche</title>
-    <noscript
-      >Javascript is disabled on your browser. This page may not display as
-      intended.</noscript
-    >
+    <meta name="robots" content="noindex, follow" />
 
     <link
       rel="stylesheet"
@@ -30,10 +27,9 @@
 
       body {
         background: url("assets/images/background_x512.webp");
-        color: #ffc;
         font-family: "Rockwell";
-        min-width: 100vw;
         min-height: 100vh;
+        width: 100vw;
       }
 
       .header {
@@ -60,6 +56,11 @@
         transform: scale(1.05);
       }
     </style>
+
+    <noscript
+      >Javascript is disabled on your browser. This page may not display as
+      intended.</noscript
+    >
   </head>
   <body>
     <header class="header">
@@ -74,41 +75,28 @@
     </header>
 
     <main>
-      <div class="modal is-active" onclick="this.remove()">
-        <div class="modal-background"></div>
-        <div class="modal-content">
-          <div class="container">
-            <div class="content is-size-1 has-text-centered">
-              <p>Jeunes gens, prenez garde aux choses que vous dites.</p>
-              <p>Tout peut sortir d'un mot qu'en passant vous perdîtes.</p>
-              <p>Tout, la haine et le deuil ! - Et ne m'objectez pas</p>
-              <p>Que vos amis sont sûrs et que vous parlez bas... -</p>
-              <p class="has-text-left">Ecoutez bien ceci :</p>
-            </div>
-          </div>
-        </div>
-        <button class="modal-close is-large" aria-label="close"></button>
-      </div>
-
       <div class="wrapper">
         <figure class="interaction">
           <img src="assets/images/1_gossip-cf.webp" type="image/webp" />
-          <audio src="assets/audio/1_gossip-cf.mp3"
-          data-volume='{ "default": 0.5, "high": 1, "low": 0.05}'
+          <audio
+            src="assets/audio/1_gossip-cf.mp3"
+            data-volume='{ "default": 0.5, "high": 1, "low": 0.05 }'
           ></audio>
         </figure>
 
         <figure class="interaction">
           <img src="assets/images/2_gossip-fl.webp" type="image/webp" />
-          <audio src="assets/audio/2_gossip-fl.mp3"
-                data-volume='{ "default": 0.5, "high": 1, "low": 0.05}'
-                ></audio>
+          <audio
+            src="assets/audio/2_gossip-fl.mp3"
+            data-volume='{ "default": 0.5, "high": 1, "low": 0.05 }'
+          ></audio>
         </figure>
 
         <figure class="interaction">
           <img src="assets/images/3_gossip-lf.webp" type="image/webp" />
-          <audio src="assets/audio/3_gossip-lf.mp3"
-                data-volume='{ "default": 0.5, "high": 1, "low": 0.01}'
+          <audio
+            src="assets/audio/3_gossip-lf.mp3"
+            data-volume='{ "default": 0.5, "high": 1, "low": 0.01 }'
           ></audio>
         </figure>
 
@@ -139,14 +127,35 @@
 
         <figure class="interaction">
           <img src="assets/images/9_gossip-cc.webp" type="image/webp" />
-          <audio src="assets/audio/9_gossip-cc.mp3"
-                data-volume='{ "default": 0.05, "high": 0.4, "low": 0.05}'
+          <audio
+            src="assets/audio/9_gossip-cc.mp3"
+            data-volume='{ "default": 0.05, "high": 0.4, "low": 0.05 }'
           ></audio>
         </figure>
       </div>
 
       <audio id="background-audio" src="assets/audio/background.mp3"></audio>
     </main>
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>Tous droits réservés &#169; 2021</p>
+        <p>
+          Fait avec <i class="fas fa-heart"></i> &
+          <i class="fas fa-coffee"></i> par Corentin Boutou et Nathan Harraud
+        </p>
+        <p>
+          Avec la participation vocale de Ophélie Baron, Corentin Boutou,
+          Florian Buiron, Arthur Cleret, Sacha Dubreuil, Léane Garnier, Inès
+          Ferreira, Coline Ferreira D'Albino, Fanny Le Reste
+        </p>
+        <p>
+          Un énorme merci aux
+          <a href="http://www.cours-charmey.fr/">Cours Charmey</a> et à
+          Angélique Charmey
+        </p>
+      </div>
+    </footer>
 
     <script type="text/javascript">
       const wrapper = document.querySelector(".wrapper");
@@ -205,14 +214,11 @@
       }
 
       function makeSquare(element, width) {
-        element.setAttribute(
-          "style",
-          `max-width: ${width}px; min-height: ${width}px`
-        );
+        element.setAttribute("style", `max-width: ${width}px; min-height: ${width}px`);
       }
 
       function clientMinSize() {
-        return Math.min(document.body.clientWidth, document.body.clientHeight);
+        return Math.min(document.documentElement.clientWidth, document.documentElement.clientHeight);
       }
 
       function updateButton(element, state) {
